@@ -8,7 +8,7 @@ register = template.Library()
 
 
 @register.inclusion_tag("menu_tree/menu.html", takes_context=True)
-def show_menu(context: RequestContext, menu_title: str) -> RequestContext:
+def draw_menu(context: RequestContext, menu_title: str) -> RequestContext:
     all_menu_items = MenuItem.objects.filter(menu__title=menu_title)
 
     main_items = [item for item in all_menu_items.filter(parent=None)]
