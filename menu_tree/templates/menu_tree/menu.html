@@ -1,27 +1,12 @@
 <ul class="menu">
-{{ request.path }} {{ 20 }}
-
     {% for m_item in menu_items %}
-    {{ items_selected }} {{ 10 }}
-    {% if not m_item.parent or request.path in m_item.child.all %}
-
-
-<!--    {{ m_item.child.all }}-->
-<!--    {{ request.path }}-->
-        <li><a class="menu_url" href="{{ m_item.url }}">{{ m_item.title }}</a></li>
-
-        {{ m_item.get_parents }} {{ 1 }}
-
-        {% endif %}
-
         {% if m_item.url == request.path %}
-    {{ m_item.get_parents }} {{ 1 }}
             <li><a class="selected" href="{{ m_item.url }}">{{ m_item.title }}</a></li>
-                {{ m_item.get_child }} <br>
-
+                {% for child in m_item.child.all %}
+                    <li><a class="child_url" href="{{ child.url }}">{{ child.title }}</a></li>
+                {% endfor %}
         {% else %}
-
+            <li><a class="menu_url" href="{{ m_item.url }}">{{ m_item.title }}</a></li>
         {% endif %}
     {% endfor %}
-
 </ul>

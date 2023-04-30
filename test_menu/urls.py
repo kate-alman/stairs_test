@@ -21,6 +21,6 @@ from menu_tree.views import MainPageView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", MainPageView.as_view(), name='home'),
-    path("<str:url>/", MainPageView.as_view(), name='detail'),
+    path("", MainPageView.as_view(), name="home"),
+    path("<slug:url>/", MainPageView.as_view(), name="detail"),
 ]

@@ -32,3 +32,12 @@ body {
     font-size: 20px;
     line-height: 29px;
 }
+
+.child_url {
+    margin-left: 1em;
+    text-decoration: none;
+    color: #05a88d;
+    font-weight: 500;
+    font-size: 20x;
+    line-height: 20px;
+}
