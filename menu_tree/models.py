@@ -42,14 +42,15 @@ class MenuItem(models.Model):
                 self.set_relation()
             return
 
-    def get_parents(self, last=None, parents=None) -> list[str]:
-        parents = [] if not parents else parents
+    def get_parents(self, last=None, parents=None, ignored=None) -> list[str]:
         if not last:
             last = self
-        parents.append(last)
-        if last.parent:
-            self.get_parents(last.parent, parents)
-        return parents[1:]
+        parents = [] if not parents else parents
+        parent = last.parent
+        if parent:
+            parents.append(parent)
+            self.get_parents(parent, parents, ignored)
+        return parents
 
     def set_relation(self) -> None:
         relations_of_parent = MenuRelation.objects.filter(
