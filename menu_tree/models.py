@@ -42,15 +42,24 @@ class MenuItem(models.Model):
                 self.set_relation()
             return
 
-    def get_parents(self, last=None, parents=None, ignored=None) -> list[str]:
-        if not last:
-            last = self
-        parents = [] if not parents else parents
-        parent = last.parent
-        if parent:
-            parents.append(parent)
-            self.get_parents(parent, parents, ignored)
-        return parents
+    def get_parents(self, item):
+        query = '''
+            WITH RECURSIVE parents AS (
+                SELECT menu_tree_menuitem.*, 0 AS relative_depth
+                FROM menu_tree_menuitem
+                WHERE id = %s
+
+                UNION ALL
+
+                SELECT menu_tree_menuitem.*, parents.relative_depth - 1
+                FROM menu_tree_menuitem, parents
+                WHERE menu_tree_menuitem.id = parents.parent_id
+            )
+            SELECT id, title, url, parent_id, relative_depth
+            FROM parents
+            ORDER BY relative_depth;
+            '''
+        return MenuItem.objects.raw(query, [item])
 
     def set_relation(self) -> None:
         relations_of_parent = MenuRelation.objects.filter(

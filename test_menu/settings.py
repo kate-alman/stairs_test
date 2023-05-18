@@ -26,18 +26,11 @@ SECRET_KEY = "django-insecure-=r^w3g6l14z0zxgtf^dpbmznp2dwj50fq8^)4!#j86$o#f@&mh
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# TODO
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
+
 
 # Application definition
 
 INSTALLED_APPS = [
-    # TODO
-    "debug_toolbar",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -55,8 +48,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # TODO
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "test_menu.urls"

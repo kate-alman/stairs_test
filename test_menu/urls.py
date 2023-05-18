@@ -23,6 +23,4 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", MainPageView.as_view(), name="home"),
     path("<slug:url>/", MainPageView.as_view(), name="detail"),
-    # TODO
-    path('__debug__/', include('debug_toolbar.urls')),
 ]
